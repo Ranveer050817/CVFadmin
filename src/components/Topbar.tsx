@@ -14,10 +14,16 @@ export const Topbar: React.FC<TopbarProps> = ({ onMenuClick }) => {
     <header className="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white border-b border-gold shadow-sm">
       <div className="flex items-center gap-4">
         <button 
-          onClick={onMenuClick}
-          className="md:hidden text-gray-800 hover:text-gold transition-colors relative z-50 pointer-events-auto"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (onMenuClick) onMenuClick();
+          }}
+          className="md:hidden p-2 -ml-2 text-gray-800 hover:text-gold transition-colors relative z-50 cursor-pointer pointer-events-auto touch-manipulation"
+          aria-label="Open menu"
         >
-          <Menu size={24} />
+          <Menu size={28} />
         </button>
         <h1 className="text-lg font-semibold text-gray-800 hidden sm:block">Admin Overview</h1>
       </div>

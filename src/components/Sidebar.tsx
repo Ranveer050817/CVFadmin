@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
   ];
 
   return (
-    <aside className={`fixed inset-y-0 left-0 z-50 w-60 flex-shrink-0 flex flex-col bg-black text-ivory transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+    <aside className={`fixed inset-y-0 left-0 z-50 w-60 flex-shrink-0 flex flex-col bg-black text-ivory transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'} pointer-events-auto`}>
       <div className="p-6 mb-4 mt-2 flex justify-between items-center">
         <div>
           <div className="text-xs tracking-widest uppercase text-gray-500 mb-1">Management</div>
@@ -47,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
             end={link.to === '/admin'}
             onClick={onClose}
             className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors border-l-4 ${
+              `flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors border-l-4 cursor-pointer touch-manipulation ${
                 isActive 
                   ? 'bg-gold-light border-gold text-gold' 
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'

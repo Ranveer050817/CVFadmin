@@ -13,12 +13,13 @@ export const AdminLayout: React.FC = () => {
       {/* Backdrop for mobile */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden" 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden cursor-pointer touch-none transition-opacity duration-300" 
           onClick={() => setIsSidebarOpen(false)}
+          aria-hidden="true"
         />
       )}
 
-      <div className="flex-grow flex flex-col md:pl-60 transition-all duration-300 w-full overflow-hidden">
+      <div className="flex-grow flex flex-col md:pl-60 transition-all duration-300 w-full overflow-hidden relative z-10">
         <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto p-8 flex flex-col">
           <div className="flex-grow">

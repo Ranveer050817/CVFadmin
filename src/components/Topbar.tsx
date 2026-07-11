@@ -2,19 +2,25 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Menu } from 'lucide-react';
 
-export const Topbar: React.FC = () => {
+interface TopbarProps {
+  onMenuClick?: () => void;
+}
+
+export const Topbar: React.FC<TopbarProps> = ({ onMenuClick }) => {
   const { user } = useAuth();
   const initials = user?.email ? user.email.substring(0, 2).toUpperCase() : 'AD';
 
   return (
-    <header className="sticky top-0 z-40 h-16 flex items-center justify-between px-8 bg-white border-b border-gold shadow-sm">
+    <header className="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white border-b border-gold shadow-sm">
       <div className="flex items-center gap-4">
-        <button className="md:hidden text-gray-800 hover:text-gold transition-colors">
+        <button 
+          onClick={onMenuClick}
+          className="md:hidden text-gray-800 hover:text-gold transition-colors relative z-50 pointer-events-auto"
+        >
           <Menu size={24} />
         </button>
         <h1 className="text-lg font-semibold text-gray-800 hidden sm:block">Admin Overview</h1>
       </div>
-
       <div className="flex items-center gap-6">
         <div className="text-right hidden sm:block">
           <div className="text-sm font-medium text-gray-900">{user?.email || 'admin@clickvickfilms.com'}</div>

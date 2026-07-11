@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../components/Sidebar';
 import { Topbar } from '../components/Topbar';
 
 export const AdminLayout: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-ivory flex">
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      
+      {/* Backdrop for mobile */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden" 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       <div className="flex-grow flex flex-col md:pl-60 transition-all duration-300 w-full overflow-hidden">
-        <Topbar />
+        <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto p-8 flex flex-col">
           <div className="flex-grow">
             <Outlet />

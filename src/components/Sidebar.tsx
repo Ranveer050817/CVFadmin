@@ -12,7 +12,12 @@ import {
   LogOut 
 } from 'lucide-react';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   const { signOut } = useAuth();
 
   const links = [
@@ -26,10 +31,12 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 w-60 flex-shrink-0 flex flex-col bg-black text-ivory transition-transform duration-300 md:translate-x-0 -translate-x-full">
-      <div className="p-6 mb-4 mt-2">
-        <div className="text-xs tracking-widest uppercase text-gray-500 mb-1">Management</div>
-        <div className="text-xl font-bold tracking-tight text-gold">CLICK VICK</div>
+    <aside className={`fixed inset-y-0 left-0 z-50 w-60 flex-shrink-0 flex flex-col bg-black text-ivory transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className="p-6 mb-4 mt-2 flex justify-between items-center">
+        <div>
+          <div className="text-xs tracking-widest uppercase text-gray-500 mb-1">Management</div>
+          <div className="text-xl font-bold tracking-tight text-gold">CLICK VICK</div>
+        </div>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-4 space-y-1">
@@ -38,6 +45,7 @@ export const Sidebar: React.FC = () => {
             key={link.to}
             to={link.to}
             end={link.to === '/admin'}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors border-l-4 ${
                 isActive 
